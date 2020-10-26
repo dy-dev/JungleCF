@@ -1,6 +1,8 @@
 package com.arcreane;
 
 public class Plant {
+    Coords m_Coords;
+
     private static int s_iMaxPlantNRJPoints;
 
     private float m_fGrowingSpeed;

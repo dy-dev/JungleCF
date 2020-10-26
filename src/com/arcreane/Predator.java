@@ -1,6 +1,8 @@
 package com.arcreane;
 
 public class Predator {
+    Coords m_Coords;
+
     static int s_iMaxPredatorAge;
     int m_iAgeMax;
     int m_iAge;
@@ -28,39 +30,44 @@ public class Predator {
     Vision m_Vision;
     Smelling m_Smelling;
 
-    void draw(){
+    void draw() {
 
     }
 
-    void step(){
+    void step() {
 
     }
 
-    void pop(){
+    void pop() {
 
     }
 
-    void move(){
+    void move() {
     }
 
-    void mating(){
-
-    }
-
-    void eat()  {
+    void mating() {
 
     }
 
-    void drink(){
+    void eat() {
 
     }
 
-    void rest(){
+    void drink() {
 
     }
 
-    void hunt()  {
+    void rest() {
 
     }
 
+    void spot(Prey p_Prey) {
+        if (m_Smelling.canSmell(p_Prey, m_Coords)) {
+            hunt(p_Prey);
+        }
+    }
+
+    void hunt(Prey p_Prey) {
+
+    }
 }

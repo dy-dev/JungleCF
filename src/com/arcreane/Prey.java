@@ -1,6 +1,8 @@
 package com.arcreane;
 
 public class Prey {
+    Coords m_Coords;
+
     static int s_iMaxPreyAge;
     int m_iAgeMax;
     int m_iAge;
