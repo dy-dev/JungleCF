@@ -1,8 +1,6 @@
 package com.arcreane;
 
-public class Plant {
-    Coords m_Coords;
-
+public class Plant extends Resource{
     private static int s_iMaxPlantNRJPoints;
 
     private float m_fGrowingSpeed;
@@ -68,16 +66,16 @@ public class Plant {
         this.m_iCurrentNRJ = m_iCurrentNRJ;
     }
 
-    void draw(){
-
+    public Plant() {
+        pop();
     }
 
-    void step(){
-
+    @Override
+    public void draw(String[][] p_Board) {
+        p_Board[m_Coords.getX() ][m_Coords.getY()] = "\uD83C\uDF3F";
+        p_Board[m_Coords.getX()+1 ][m_Coords.getY()] = "";
     }
 
-    void pop(){
-    }
 
     void grow(){
     }

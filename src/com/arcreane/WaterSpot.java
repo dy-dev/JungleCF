@@ -1,25 +1,31 @@
 package com.arcreane;
 
-public class WaterSpot {
-    Coords m_CenterCoords;
-
+public class WaterSpot extends Resource {
     int m_iWidth;
     int m_iHeight;
     float m_fQuantity;
     float m_fEvaporationSpeed;
 
-    WaterSpot(){
+    WaterSpot(Terrain p_Terrain) {
         m_fQuantity = 500.0f;
-        m_CenterCoords = new Coords(Jungle.getTerrain().getWidth() / 2,
-                Jungle.getTerrain().getHeight() / 2);
-        m_iHeight = Jungle.getTerrain().getHeight() / 5;
-        m_iWidth = Jungle.getTerrain().getWidth() / 5;
-    }
-    void draw() {
+        m_Coords = new Coords(p_Terrain.getWidth() / 2,
+                p_Terrain.getHeight() / 2);
 
+        m_iHeight = p_Terrain.getHeight() / 5;
+        m_iWidth = p_Terrain.getWidth() / 5;
     }
 
-    void step() {
+    @Override
+    public void draw(String[][] p_Board) {
+        for (int i = -m_iWidth/2; i < m_iWidth/2; i+=2) {
+            for (int k = -m_iHeight/2; k < m_iHeight/2; k++) {
+                p_Board[m_Coords.getX() + i ][m_Coords.getY()+k] = "\uD83C\uDF0A";
+                p_Board[m_Coords.getX() + i +1][m_Coords.getY()+k] = "";
+            }
+        }
+    }
+
+    public void step() {
 
     }
 
@@ -28,9 +34,13 @@ public class WaterSpot {
     }
 
     public boolean isInWater(Coords p_Coords) {
-return ( Math.abs(p_Coords.getX() - m_CenterCoords.getX()) < m_iWidth/2 &&
-        Math.abs(p_Coords.getY() - m_CenterCoords.getY()) < m_iHeight/2 );
+        return (Math.abs(p_Coords.getX() - m_Coords.getX()) < m_iWidth / 2 + 1 &&
+                Math.abs(p_Coords.getY() - m_Coords.getY()) < m_iHeight / 2 + 1);
 
     }
 
+    @Override
+    void isDrinked(Animal p_Animal) {
+        m_fQuantity -= p_Animal.drinkWater();
+    }
 }

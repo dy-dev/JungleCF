@@ -1,18 +1,22 @@
 package com.arcreane;
 
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 public class Jungle {
     public static Random s_Random = new Random();
-    private static Terrain s_Terrain = new Terrain();
+    public static JungleObject[] s_JungleObject = new JungleObject[2];
 
-    public static void main(String[] args) {
-        Weather weather = new Weather(s_Terrain);
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        createNewTerrain();
+        s_JungleObject[1] = new Weather(getTerrain());
 
         // while(terrain.hasLivingCreatures()){
-        weather.step();
-        s_Terrain.step();
-        s_Terrain.draw();
+        for (JungleObject obj : s_JungleObject) {
+            obj.step();
+        }
+        getTerrain().draw();
 
         //try {
         //    Thread.sleep(250);
@@ -22,7 +26,14 @@ public class Jungle {
         //}
     }
 
-    public static Terrain getTerrain(){
-        return s_Terrain;
+    private static void createNewTerrain() {
+        Terrain terrain = new Terrain();
+        s_JungleObject[0] = terrain;
+        terrain.init();
+    }
+
+    public static Terrain getTerrain() {
+        return (Terrain) s_JungleObject[0];
+
     }
 }

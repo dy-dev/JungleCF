@@ -4,28 +4,32 @@ public class Prey extends Animal {
     public static final int BORN_VIGOR = 30;
     public static final int BORN_LIFE_POINT = 30;
 
-    static int s_iMaxPreyAge;
-    static int s_iMaxPreyLifePoint;
-    static int s_iMaxPreyVigor;
-    static float s_fMaxPreyMovingSpeed;
+    public static final int MAX_PREY_AGE = 30;
+    public static final int MAX_PREY_LIFE_POINT = 30;
+    public static final int MAX_PREY_VIGOR = 30;
+    public static final float MAX_PREY_MOVING_SPEED = 30;
     static float s_fPreyAcceleration;
 
     Hearing m_Hearing;
 
-    public Prey() {
-        super(s_iMaxPreyAge, s_iMaxPreyLifePoint, s_iMaxPreyVigor, s_fMaxPreyMovingSpeed);
+    public Prey(Coords p_Coords) {
+        super(MAX_PREY_AGE, MAX_PREY_LIFE_POINT, MAX_PREY_VIGOR,
+                MAX_PREY_MOVING_SPEED,
+                p_Coords, BORN_LIFE_POINT, BORN_VIGOR);
         m_Hearing = new Hearing(this);
 
-        m_fOrientation = (float) (Jungle.s_Random.nextFloat() * Math.PI * 2.0f);
-        pop();
-    }
-
-    void draw() {
 
     }
 
-    void step() {
+    @Override
+    public void draw(String[][] p_Board) {
+        p_Board[m_Coords.getX() ][m_Coords.getY()] = "\uD83D\uDC03";
+        p_Board[m_Coords.getX()+1 ][m_Coords.getY()] = "";
+    }
 
+    @Override
+    public int drinkWater() {
+        return m_iLifePoint  /10;
     }
 
     void move() {

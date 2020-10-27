@@ -1,6 +1,6 @@
 package com.arcreane;
 
-public class Weather {
+public class Weather extends JungleObject{
     private final Terrain m_Terrain;
 
     public Weather(Terrain p_Terrain) {

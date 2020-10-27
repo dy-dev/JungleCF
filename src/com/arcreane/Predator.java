@@ -1,8 +1,9 @@
 package com.arcreane;
 
-import java.util.Random;
+public class Predator extends Animal {
+    public static final int BORN_VIGOR = 50;
+    public static final int BORN_LIFE_POINT = 40;
 
-public class Predator extends Animal{
     public static final int MAX_PREDATOR_AGE = 30;
     public static final int MAX_PREDATOR_LIFE_POINT = 30;
     public static final int MAX_PREDATOR_VIGOR = 30;
@@ -15,38 +16,38 @@ public class Predator extends Animal{
     static float s_fPredatorMovingNoise = 2.0f;
     static float s_fPredatorAcceleration;
 
-    Smelling m_Smelling ;
+    Smelling m_Smelling;
 
-    public Predator() {
+    public Predator(Coords p_Coords) {
         super(MAX_PREDATOR_AGE, MAX_PREDATOR_LIFE_POINT,
-                MAX_PREDATOR_VIGOR, MAX_PREDATOR_MOVING_SPEED);
+                MAX_PREDATOR_VIGOR, MAX_PREDATOR_MOVING_SPEED,
+                p_Coords, BORN_LIFE_POINT, BORN_VIGOR);
 
         m_Smelling = new Smelling(this);
-
-        pop();
     }
 
-    void draw() {
-
+    @Override
+    public void draw(String[][] p_Board) {
+        p_Board[m_Coords.getX() ][m_Coords.getY()] = "\uD83E\uDD81";
+        p_Board[m_Coords.getX()+1 ][m_Coords.getY()] = "";
     }
 
-    void step() {
-
-    }
-
-    void pop() {
-           m_Coords = new Coords();
-           m_fOrientation = (float) (Jungle.s_Random.nextFloat() * Math.PI * 2.0f);
-           m_iAge = Jungle.s_Random.nextInt(m_iAgeMax);
-           m_iLifePoint = Jungle.s_Random.nextInt(m_iLifePointMax);
-           m_iVigor = Jungle.s_Random.nextInt(m_iVigorMax);
+    @Override
+    public int drinkWater() {
+        return m_iLifePoint / 2;
     }
 
     void move() {
     }
 
     void mating() {
-
+        //Check with terrain if there is place left in the array to accept
+        //a new predator
+        int i = Jungle.getTerrain().getFreePredatorIndex();
+        if (i != -1) {
+            Coords coords = Jungle.getTerrain().findClosestFreeSpot(m_Coords);
+            Jungle.getTerrain().insertPredator(i, new Predator(coords));
+        }
     }
 
     void eat() {
