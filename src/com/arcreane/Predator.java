@@ -2,48 +2,26 @@ package com.arcreane;
 
 import java.util.Random;
 
-public class Predator {
-    public static final int MAX_AGE = 30;
-    public static final int MAX_LIFE_POINT = 30;
-    public static final int MAX_VIGOR = 30;
-
-    Coords m_Coords;
-
-    static int s_iMaxPredatorAge = MAX_AGE;
-    int m_iAgeMax;
-    int m_iAge;
-
-    static int s_iMaxPredatorLifePoint = MAX_LIFE_POINT;
-    int m_iLifePointMax;
-    int m_iLifePoint;
-
-    static int s_iMaxPredatorVigor = MAX_VIGOR;
-    int m_iVigorMax;
-    int m_iVigor;
+public class Predator extends Animal{
+    public static final int MAX_PREDATOR_AGE = 30;
+    public static final int MAX_PREDATOR_LIFE_POINT = 30;
+    public static final int MAX_PREDATOR_VIGOR = 30;
+    public static final float MAX_PREDATOR_MOVING_SPEED = 30;
 
     static float s_fPredatorSpeedMovingBySmell;
     static float s_fMaxPredatorSpeedMovingByView;
     static float s_fMaxPredatorMovingSpeed;
-    float m_fMovingSpeed;
 
-    static float s_fPredatorMovingNoise;
-
+    static float s_fPredatorMovingNoise = 2.0f;
     static float s_fPredatorAcceleration;
 
-    float m_fOrientation; //Angle varying between 0 and 2Pi
-
-    Vision m_Vision;
-    Smelling m_Smelling;
+    Smelling m_Smelling ;
 
     public Predator() {
-        m_iAgeMax = s_iMaxPredatorAge/2 + Jungle.s_Random.nextInt(s_iMaxPredatorAge/2);
-        m_iLifePointMax =s_iMaxPredatorLifePoint/2 + Jungle.s_Random.nextInt(s_iMaxPredatorLifePoint/2);
-        m_iVigorMax = s_iMaxPredatorVigor/2 + Jungle.s_Random.nextInt(s_iMaxPredatorVigor/2);
+        super(MAX_PREDATOR_AGE, MAX_PREDATOR_LIFE_POINT,
+                MAX_PREDATOR_VIGOR, MAX_PREDATOR_MOVING_SPEED);
 
-        m_fMovingSpeed = (Jungle.s_Random.nextFloat() +0.01f)* s_fMaxPredatorMovingSpeed;
-
-        m_Vision = new Vision();
-        m_Smelling = new Smelling();
+        m_Smelling = new Smelling(this);
 
         pop();
     }
