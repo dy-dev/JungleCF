@@ -1,6 +1,10 @@
 package com.arcreane;
 
 public class Prey {
+    public static final int BORN_VIGOR = 30;
+    public static final int BORN_LIFE_POINT = 30;
+
+
     Coords m_Coords;
 
     static int s_iMaxPreyAge;
@@ -26,6 +30,20 @@ public class Prey {
     Vision m_Vision;
     Hearing m_Hearing;
 
+    public Prey() {
+        m_iAgeMax = s_iMaxPreyAge /2 + Jungle.s_Random.nextInt(s_iMaxPreyAge/2);
+        m_iLifePointMax = s_iMaxPreyLifePoint/2 + Jungle.s_Random.nextInt(s_iMaxPreyLifePoint/2);
+        m_iVigorMax = s_iMaxPreyVigor/2 + Jungle.s_Random.nextInt(s_iMaxPreyVigor/2);
+
+        m_fMovingSpeed = (Jungle.s_Random.nextFloat() +0.01f)* s_fMaxPreyMovingSpeed;
+
+        m_Vision = new Vision();
+        m_Hearing = new Hearing();
+
+        m_fOrientation = (float) (Jungle.s_Random.nextFloat() * Math.PI * 2.0f);
+        pop();
+    }
+
     void draw(){
 
     }
@@ -34,8 +52,18 @@ public class Prey {
 
     }
 
-    void pop(){
+    public void pop(Coords p_Coords){
+        m_Coords = p_Coords;
+        m_iAge = 0;
+        m_iLifePoint = BORN_LIFE_POINT;
+        m_iVigor = BORN_VIGOR;
+    }
 
+    void pop() {
+            m_Coords = new Coords();
+            m_iAge = Jungle.s_Random.nextInt(m_iAgeMax);
+            m_iLifePoint = Jungle.s_Random.nextInt(m_iLifePointMax);
+            m_iVigor = Jungle.s_Random.nextInt(m_iVigorMax);
     }
 
     void move(){

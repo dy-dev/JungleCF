@@ -7,8 +7,6 @@ public class Predator {
     public static final int MAX_LIFE_POINT = 30;
     public static final int MAX_VIGOR = 30;
 
-
-
     Coords m_Coords;
 
     static int s_iMaxPredatorAge = MAX_AGE;
@@ -38,16 +36,16 @@ public class Predator {
     Smelling m_Smelling;
 
     public Predator() {
-        m_iAgeMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorAge);
-        m_iLifePointMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorLifePoint);
-        m_iVigorMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorVigor);
+        m_iAgeMax = s_iMaxPredatorAge/2 + Jungle.s_Random.nextInt(s_iMaxPredatorAge/2);
+        m_iLifePointMax =s_iMaxPredatorLifePoint/2 + Jungle.s_Random.nextInt(s_iMaxPredatorLifePoint/2);
+        m_iVigorMax = s_iMaxPredatorVigor/2 + Jungle.s_Random.nextInt(s_iMaxPredatorVigor/2);
 
         m_fMovingSpeed = (Jungle.s_Random.nextFloat() +0.01f)* s_fMaxPredatorMovingSpeed;
 
         m_Vision = new Vision();
         m_Smelling = new Smelling();
 
-        pop(false);
+        pop();
     }
 
     void draw() {
@@ -58,14 +56,12 @@ public class Predator {
 
     }
 
-    void pop(boolean p_Born) {
-       if(!p_Born) {
+    void pop() {
            m_Coords = new Coords();
            m_fOrientation = (float) (Jungle.s_Random.nextFloat() * Math.PI * 2.0f);
            m_iAge = Jungle.s_Random.nextInt(m_iAgeMax);
            m_iLifePoint = Jungle.s_Random.nextInt(m_iLifePointMax);
            m_iVigor = Jungle.s_Random.nextInt(m_iVigorMax);
-       }
     }
 
     void move() {
