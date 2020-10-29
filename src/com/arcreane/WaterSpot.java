@@ -19,8 +19,8 @@ public class WaterSpot extends Resource {
     public void draw(String[][] p_Board) {
         for (int i = -m_iWidth/2; i < m_iWidth/2; i+=2) {
             for (int k = -m_iHeight/2; k < m_iHeight/2; k++) {
-                p_Board[m_Coords.getX() + i ][m_Coords.getY()+k] = "\uD83C\uDF0A";
-                p_Board[m_Coords.getX() + i +1][m_Coords.getY()+k] = "";
+                p_Board[m_Coords.getY()+k][m_Coords.getX() + i ] = "\uD83C\uDF0A";
+                p_Board[m_Coords.getY()+k][m_Coords.getX() + i +1] = "";
             }
         }
     }

@@ -2,15 +2,18 @@ package com.arcreane;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 public class Terrain extends Drawable {
     private int m_iWidth;
     private int m_iHeight;
 
     private String[][] m_Board;
+
     public int getWidth() {
         return m_iWidth;
     }
+
     public int getHeight() {
         return m_iHeight;
     }
@@ -27,15 +30,12 @@ public class Terrain extends Drawable {
 
         m_iWidth = 120;
         m_iHeight = 20;
-        m_Board = new String[m_iWidth][];
-        for (int i = 0; i < m_iWidth; i++) {
-            m_Board[i] = new String[m_iHeight];
-        }
+
         initBoard();
         m_Drawable[0] = new WaterSpot(this);
     }
 
-    public WaterSpot getWaterSpot(){
+    public WaterSpot getWaterSpot() {
         return (WaterSpot) m_Drawable[0];
     }
 
@@ -53,11 +53,16 @@ public class Terrain extends Drawable {
     }
 
     private void initBoard() {
-        for (int i = 0; i < m_iWidth; i++) {
-            for (int k = 0; k < m_iHeight; k++) {
-                if ((i == 0 || i == m_iWidth - 1) && k != 0)
+        m_Board = new String[m_iHeight][];
+        for (int i = 0; i < m_iHeight; i++) {
+            m_Board[i] = new String[m_iWidth];
+        }
+
+        for (int i = 0; i < m_iHeight; i++) {
+            for (int k = 0; k < m_iWidth; k++) {
+                if ((k == 0 || k == m_iWidth - 1) && i != 0)
                     m_Board[i][k] = "|";
-                else if (k == 0 || k == m_iHeight - 1)
+                else if (i == 0 || i == m_iHeight - 1)
                     m_Board[i][k] = "_";
                 else
                     m_Board[i][k] = " ";
@@ -77,13 +82,47 @@ public class Terrain extends Drawable {
             if (drawable != null)
                 drawable.draw(m_Board);
         }
+        var start = System.nanoTime();
+        for (int i = 0; i < 1000; i++) {
+            String board = "";
 
-        for (int k = 0; k < m_iHeight; k++) {
-            for (int i = 0; i < m_iWidth; i++) {
-                outStream.print(m_Board[i][k]);
+            for (int k = 0; k < m_iHeight; k++) {
+                board += String.join("", m_Board[k]);
+//            for (int i = 0; i < m_iWidth; i++) {
+//                outStream.print(m_Board[k][i]);
+//            }
+                //outStream.println("");
+                board += "\n";
             }
-            outStream.println("");
+            outStream.print(board);
         }
+        var end1 = System.nanoTime() - start;
+        start = System.nanoTime();
+        for (int j = 0; j < 1000; j++) {
+
+            for (int k = 0; k < m_iHeight; k++) {
+                for (int i = 0; i < m_iWidth; i++) {
+                    outStream.print(m_Board[k][i]);
+                }
+                outStream.println("");
+            }
+        }
+        var end2 = System.nanoTime() - start;
+        start = System.nanoTime();
+        for (int j = 0; j < 1000; j++) {
+            StringBuilder board = new StringBuilder();
+
+            for (int k = 0; k < m_iHeight; k++) {
+                board.append(String.join("", m_Board[k])).append("\n");
+            }
+            outStream.print(board);
+        }
+        var end3 = System.nanoTime() - start;
+
+        System.out.println(end1/Math.pow(10,9));
+        System.out.println(end2/Math.pow(10,9));
+        System.out.println(end3/Math.pow(10,9));
+
     }
 
     boolean hasLivingCreatures() {
@@ -99,8 +138,8 @@ public class Terrain extends Drawable {
         if (getWaterSpot().isInWater(p_Coords))
             return true;
 
-        for (Drawable drawable : m_Drawable ) {
-            if (drawable != null && drawable.getCoords().isSame(p_Coords))
+        for (var drawable : m_Drawable) {
+            if (drawable != null && drawable.getCoords().equals(p_Coords))
                 return true;
         }
         return false;

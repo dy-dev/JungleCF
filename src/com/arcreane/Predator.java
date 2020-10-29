@@ -26,10 +26,11 @@ public class Predator extends Animal {
         m_Smelling = new Smelling(this);
     }
 
+
     @Override
     public void draw(String[][] p_Board) {
-        p_Board[m_Coords.getX() ][m_Coords.getY()] = "\uD83E\uDD81";
-        p_Board[m_Coords.getX()+1 ][m_Coords.getY()] = "";
+        p_Board[m_Coords.getY()][m_Coords.getX() ] = "\uD83E\uDD81";
+        p_Board[m_Coords.getY()][m_Coords.getX() + 1] = "";
     }
 
     @Override

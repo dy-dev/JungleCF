@@ -1,22 +1,39 @@
 package com.arcreane;
 
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class Jungle {
     public static Random s_Random = new Random();
     public static JungleObject[] s_JungleObject = new JungleObject[2];
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        createNewTerrain();
-        s_JungleObject[1] = new Weather(getTerrain());
+        AnsiConsole.systemInstall();
+        char escCode = 0x1B;
+        int row = 10; int column = 10;
+        System.out.print(String.format("%c[%d;%df",escCode,row,column));
 
-        // while(terrain.hasLivingCreatures()){
-        for (JungleObject obj : s_JungleObject) {
-            obj.step();
+        System.out.println(ansi().eraseScreen().fg(Ansi.Color.RED).a("Hello").fg(Ansi.Color.GREEN).a("World"));
+        System.out.println(ansi().reset());
+
+        for (Ansi.Color col: Ansi.Color.values()) {
+            System.out.println(col);
+
         }
-        getTerrain().draw();
+//        createNewTerrain();
+//        s_JungleObject[1] = new Weather(getTerrain());
+//
+//        // while(terrain.hasLivingCreatures()){
+//        for (JungleObject obj : s_JungleObject) {
+//            obj.step();
+//        }
+//        getTerrain().draw();
 
         //try {
         //    Thread.sleep(250);
@@ -34,6 +51,5 @@ public class Jungle {
 
     public static Terrain getTerrain() {
         return (Terrain) s_JungleObject[0];
-
     }
 }

@@ -27,7 +27,12 @@ public class Coords {
         return m_iY;
     }
 
-    public boolean isSame(Coords p_Coords) {
+    @Override
+    public boolean equals(Object obj) {
+        //if(obj.getClass() != this.getClass())
+        if(obj instanceof Coords)
+            return false;
+        Coords p_Coords = (Coords) obj;
         return Math.abs(p_Coords.m_iX - m_iX)<=1 && p_Coords.m_iY == m_iY;
     }
 }
