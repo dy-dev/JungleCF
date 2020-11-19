@@ -2,6 +2,7 @@ package com.arcreane;
 
 public class Prey {
     Coords m_Coords;
+    public static final int MAX_WATER_DRUNK = 50;
 
     static int s_iMaxPreyAge;
     int m_iAgeMax;
@@ -26,41 +27,53 @@ public class Prey {
     Vision m_Vision;
     Hearing m_Hearing;
 
-    void draw(){
+    //Variable d'instance qui permet à la proie de savoir
+    //ou se trouve le plan d'eau et de s'y diriger
+    WaterSpot m_WaterSpot;
+
+    public Prey(WaterSpot p_WaterSpot) {
+        m_WaterSpot = p_WaterSpot;
+    }
+
+    void draw() {
 
     }
 
-    void step(){
+    void step() {
+        drink();
+    }
+
+    void pop() {
 
     }
 
-    void pop(){
+    void move() {
+    }
+
+    void mating() {
 
     }
 
-    void move(){
-    }
-
-    void mating(){
+    void eat() {
 
     }
 
-    void eat()  {
+    void drink() {
+        if(Terrain.s_RandGenerator.nextInt(101) < 20 ) {
+            int waterThirst =  1 + Terrain.s_RandGenerator.nextInt(MAX_WATER_DRUNK);
+            System.out.println("Prey want to drink " + waterThirst);
+            int waterAvailable = m_WaterSpot.requestDrinkingQuantity(waterThirst);
+            System.out.println("Water drunk : " + waterAvailable);
+        }
+    }
+
+    void rest() {
 
     }
 
-    void drink(){
+    void flee() {
 
     }
-
-    void rest(){
-
-    }
-
-    void flee()  {
-
-    }
-
 
 
 }

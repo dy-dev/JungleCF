@@ -1,25 +1,45 @@
 package com.arcreane;
 
 public class WaterSpot {
-    Coords m_Coords;
+    private Coords m_Coords;
 
-    float m_fArea;
-    float m_fQuantity;
-    float m_fEvaporationSpeed;
+    private float m_fArea;
 
-    WaterSpot(){
-        m_fQuantity = 500.0f;
+    public void setQuantity(int p_iQuantity) {
+        m_iQuantity = p_iQuantity;
+    }
+
+    public int getQuantity() {
+        return m_iQuantity;
+    }
+
+    private int m_iQuantity;
+    private float m_fEvaporationSpeed;
+
+    WaterSpot() {
+        m_iQuantity = 500;
         m_Coords = new Coords();
     }
+
     void draw() {
 
     }
 
     void step() {
-
+        System.out.println("Water quantity : " + m_iQuantity);
     }
 
-    public void addWater(float p_fQuantity) {
-        m_fQuantity += p_fQuantity;
+    public int requestDrinkingQuantity(int waterDrunk) {
+        if (m_iQuantity == 0)
+            return 0;
+
+        int tmp = m_iQuantity;
+        if (tmp > waterDrunk) {
+            tmp = waterDrunk;
+            m_iQuantity -= tmp;
+        } else {
+            m_iQuantity = 0;
+        }
+        return tmp;
     }
 }
