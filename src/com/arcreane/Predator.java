@@ -5,7 +5,7 @@ public class Predator {
     public static final int MAX_LIFE_POINT = 30;
     public static final int MAX_VIGOR = 30;
 
-    public static final int MAX_WATER_DRUNK = 50;
+    public static final int MAX_WATER_DRUNK = 5;
 
 
     Coords m_Coords;
@@ -83,7 +83,7 @@ public class Predator {
     }
 
     void drink() {
-        if(Terrain.s_RandGenerator.nextInt(100) < 20 ) {
+        if(Terrain.s_RandGenerator.nextInt(100) < 10 ) {
             int waterThirst =  1 + Terrain.s_RandGenerator.nextInt(MAX_WATER_DRUNK);
             System.out.println("Predator want to drink " + waterThirst);
             int waterAvailable = m_WaterSpot.requestDrinkingQuantity(waterThirst);

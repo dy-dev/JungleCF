@@ -4,6 +4,13 @@ public class WaterSpot {
     private Coords m_Coords;
 
     private float m_fArea;
+    private float m_fEvaporationSpeed;
+    private int m_iQuantity;
+
+    WaterSpot() {
+        m_iQuantity = 5000;
+        m_Coords = new Coords();
+    }
 
     public void setQuantity(int p_iQuantity) {
         m_iQuantity = p_iQuantity;
@@ -13,13 +20,6 @@ public class WaterSpot {
         return m_iQuantity;
     }
 
-    private int m_iQuantity;
-    private float m_fEvaporationSpeed;
-
-    WaterSpot() {
-        m_iQuantity = 500;
-        m_Coords = new Coords();
-    }
 
     void draw() {
 

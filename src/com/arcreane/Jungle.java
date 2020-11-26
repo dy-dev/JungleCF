@@ -13,7 +13,7 @@ public class Jungle {
             weather.step();
             terrain.step();
             //terrain.draw();
-
+            System.out.println("**********************************************             Fin de cycle        **********************************************************");
            try {
                Thread.sleep(250);
            } catch (InterruptedException e) {
