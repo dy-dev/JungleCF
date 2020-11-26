@@ -12,7 +12,7 @@ public class Jungle {
         while(terrain.getWaterSpot().getQuantity() != 0){
             weather.step();
             terrain.step();
-            //terrain.draw();
+            terrain.draw();
             System.out.println("**********************************************             Fin de cycle        **********************************************************");
            try {
                Thread.sleep(250);

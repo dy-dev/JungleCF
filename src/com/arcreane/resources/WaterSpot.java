@@ -1,13 +1,14 @@
-package com.arcreane;
+package com.arcreane.resources;
 
-public class WaterSpot {
-    private Coords m_Coords;
+import com.arcreane.Coords;
+import com.arcreane.animal.Animal;
 
+public class WaterSpot extends Resource{
     private float m_fArea;
     private float m_fEvaporationSpeed;
     private int m_iQuantity;
 
-    WaterSpot() {
+    public WaterSpot() {
         m_iQuantity = 5000;
         m_Coords = new Coords();
     }
@@ -21,15 +22,19 @@ public class WaterSpot {
     }
 
 
-    void draw() {
-
+    @Override
+    public void draw() {
+        super.draw();
+        System.out.println("Glouglou");
     }
 
-    void step() {
+
+    @Override
+    public void step() {
         System.out.println("Water quantity : " + m_iQuantity);
     }
 
-    public int requestDrinkingQuantity(int waterDrunk) {
+    public int requestDrinkingQuantity(Animal p_Animal, int waterDrunk) {
         if (m_iQuantity == 0)
             return 0;
 

@@ -1,45 +1,30 @@
-package com.arcreane;
+package com.arcreane.animal;
 
-public class Predator {
+import com.arcreane.*;
+import com.arcreane.animal.sens.Smelling;
+import com.arcreane.animal.sens.Vision;
+import com.arcreane.resources.WaterSpot;
+
+public class Predator extends Animal {
     public static final int MAX_AGE = 30;
     public static final int MAX_LIFE_POINT = 30;
     public static final int MAX_VIGOR = 30;
 
-    public static final int MAX_WATER_DRUNK = 5;
-
-
-    Coords m_Coords;
-
     static int s_iMaxPredatorAge = MAX_AGE;
-    int m_iAgeMax;
-    int m_iAge;
-
     static int s_iMaxPredatorLifePoint = MAX_LIFE_POINT;
-    int m_iLifePointMax;
-    int m_iLifePoint;
-
     static int s_iMaxPredatorVigor = MAX_VIGOR;
-    int m_iVigorMax;
-    int m_iVigor;
 
     static float s_fPredatorSpeedMovingBySmell;
     static float s_fMaxPredatorSpeedMovingByView;
     static float s_fMaxPredatorMovingSpeed;
-    float m_fMovingSpeed;
-
     static float s_fPredatorMovingNoise;
-
     static float s_fPredatorAcceleration;
 
-    float m_fOrientation; //Angle varying between 0 and 2Pi
-
-    Vision m_Vision;
     Smelling m_Smelling;
-
-    WaterSpot m_WaterSpot;
 
     //Constructeur qui prend un Waterspot en parametre
     public Predator(WaterSpot p_WaterSpot) {
+        super(null);
         m_WaterSpot = p_WaterSpot;
         m_iAgeMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorAge);
         m_iLifePointMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorLifePoint);
@@ -52,12 +37,14 @@ public class Predator {
 
         pop(false);
     }
-
-    void draw() {
-
+    @Override
+    public void draw() {
+        super.draw();
+        System.out.println("Je suis un prédateur je vais tous vous bouffer");
     }
 
-    void step() {
+    @Override
+    public void step() {
         drink();
     }
 
@@ -80,15 +67,6 @@ public class Predator {
 
     void eat() {
 
-    }
-
-    void drink() {
-        if(Terrain.s_RandGenerator.nextInt(100) < 10 ) {
-            int waterThirst =  1 + Terrain.s_RandGenerator.nextInt(MAX_WATER_DRUNK);
-            System.out.println("Predator want to drink " + waterThirst);
-            int waterAvailable = m_WaterSpot.requestDrinkingQuantity(waterThirst);
-            System.out.println("Water drunk : " + waterAvailable);
-        }
     }
 
     void rest() {
