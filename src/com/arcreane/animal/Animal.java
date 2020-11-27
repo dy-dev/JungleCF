@@ -1,12 +1,13 @@
 package com.arcreane.animal;
 
+import com.arcreane.Consumable;
 import com.arcreane.Coords;
 import com.arcreane.SpatialItem;
 import com.arcreane.Terrain;
 import com.arcreane.animal.sens.Vision;
 import com.arcreane.resources.WaterSpot;
 
-public class Animal extends SpatialItem {
+public abstract class Animal extends SpatialItem {
 
     public static final int MAX_WATER_DRUNK = 5;
 
@@ -32,13 +33,12 @@ public class Animal extends SpatialItem {
         m_iLifePoint = p_nBLifePoint;
     }
 
+    protected abstract  void eat(Consumable p_Consumable);
+
     protected void drink() {
         if(Terrain.s_RandGenerator.nextInt(101) < 10 ) {
             int waterThirst =  1 + Terrain.s_RandGenerator.nextInt(MAX_WATER_DRUNK);
-            System.out.println("Prey want to drink " + waterThirst);
             int waterAvailable = m_WaterSpot.requestDrinkingQuantity(this, waterThirst);
-            System.out.println("Water drunk : " + waterAvailable);
         }
     }
-
 }

@@ -37,10 +37,15 @@ public class Predator extends Animal {
 
         pop(false);
     }
+
+    @Override
+    protected void drink() {
+        super.drink();
+    }
+
     @Override
     public void draw() {
         super.draw();
-        System.out.println("Je suis un prédateur je vais tous vous bouffer");
     }
 
     @Override
@@ -65,9 +70,7 @@ public class Predator extends Animal {
 
     }
 
-    void eat() {
 
-    }
 
     void rest() {
 
@@ -81,5 +84,11 @@ public class Predator extends Animal {
 
     void hunt(Prey p_Prey) {
 
+    }
+
+    @Override
+    protected void eat(Consumable p_Consumable) {
+        //Gérer la manière dont ca récupère les points de vie
+        //Fait la sieste pour digérer
     }
 }

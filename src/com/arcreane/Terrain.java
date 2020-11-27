@@ -1,6 +1,5 @@
 package com.arcreane;
 
-import com.arcreane.animal.Animal;
 import com.arcreane.animal.Predator;
 import com.arcreane.animal.Prey;
 import com.arcreane.resources.Plant;
@@ -26,20 +25,24 @@ public class Terrain {
     private WaterSpot m_WaterSpot;*/
 
     SpatialItem[] m_SpatialItemArray;
+    Consumable[] m_ConsumableArray;
 
     public Terrain() {
 
         m_SpatialItemArray = new SpatialItem[301];
-
+        m_ConsumableArray = new Consumable[201];
         //Creation de la variable de type WaterSpot
         //Elle doit être instanciée en premier car elle est passée en paramètre
         //au predateurs et aux proies
         m_SpatialItemArray[0] = new WaterSpot();
+        m_ConsumableArray[0] = getWaterSpot();
 
         for (int i = 1; i < s_iArrayLength + 1; i++) {
-            m_SpatialItemArray[i] = new Prey( getWaterSpot());
+            m_SpatialItemArray[i] = new Prey(getWaterSpot());
+            m_ConsumableArray[i] = (Consumable) m_SpatialItemArray[i];
             m_SpatialItemArray[i + s_iArrayLength] = new Predator(getWaterSpot());
-            m_SpatialItemArray[i + 2* s_iArrayLength] = new Plant();
+            m_SpatialItemArray[i + 2 * s_iArrayLength] = new Plant();
+            m_ConsumableArray[i + s_iArrayLength] = (Consumable) m_SpatialItemArray[i+ 2 * s_iArrayLength];
         }
 
         m_iwidth = 80;
@@ -50,15 +53,18 @@ public class Terrain {
         for (SpatialItem item : m_SpatialItemArray) {
             item.step();
         }
+
+        for(var consomable : m_ConsumableArray){
+            consomable.consume();
+        }
     }
 
     void draw() {
-        for (SpatialItem item : m_SpatialItemArray) {
+        for (var item : m_SpatialItemArray) {
             item.draw();
         }
-        for (int i = 0; i <m_iHeight; i++) {
-
-            for (int k = 0; k <  m_iwidth; k++) {
+        for (int i = 0; i < m_iHeight; i++) {
+            for (int k = 0; k < m_iwidth; k++) {
                 if (i == 0 || i == m_iHeight - 1)
                     System.out.print("_");
                 else if (k == 0 || k == m_iwidth - 1)
@@ -79,7 +85,7 @@ public class Terrain {
         getWaterSpot().setQuantity(getWaterSpot().getQuantity() + p_iQuantity);
     }
 
-    public WaterSpot getWaterSpot(){
+    public WaterSpot getWaterSpot() {
         return (WaterSpot) m_SpatialItemArray[0];
     }
 }

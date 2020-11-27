@@ -1,11 +1,10 @@
 package com.arcreane.animal;
 
-import com.arcreane.*;
+import com.arcreane.Consumable;
 import com.arcreane.animal.sens.Hearing;
-import com.arcreane.animal.sens.Vision;
 import com.arcreane.resources.WaterSpot;
 
-public class Prey  extends Animal {
+public class Prey extends Animal implements Consumable {
     public static final int MAX_WATER_DRUNK = 5;
 
     static int s_iMaxPreyAge;
@@ -25,7 +24,6 @@ public class Prey  extends Animal {
     @Override
     public void draw() {
         super.draw();
-        System.out.println("Ouh j'ai peur je vais me faire becter");
     }
 
     @Override
@@ -44,11 +42,19 @@ public class Prey  extends Animal {
 
     }
 
-    void eat() {
+    @Override
+    protected void eat(Consumable p_Consumable) {
+        int consumablePoints = p_Consumable.consume();
+        if(m_iLifePoint + consumablePoints  < s_iMaxPreyLifePoint){
+            m_iLifePoint += consumablePoints;
+        }
+        else
+            m_iLifePoint = s_iMaxPreyLifePoint;
+
+        //Gérer la manière dont ca récupère les points de vie
+        //Elle peut chercher une autre proie pour s'accoupler
 
     }
-
-
 
     void rest() {
 
@@ -58,5 +64,8 @@ public class Prey  extends Animal {
 
     }
 
-
+    @Override
+    public int consume() {
+        return m_iLifePoint;
+    }
 }

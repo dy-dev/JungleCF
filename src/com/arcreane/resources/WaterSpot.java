@@ -47,4 +47,9 @@ public class WaterSpot extends Resource{
         }
         return tmp;
     }
+
+    @Override
+    public int consume() {
+        return 5;
+    }
 }

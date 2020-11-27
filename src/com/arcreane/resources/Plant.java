@@ -71,7 +71,6 @@ public class Plant extends Resource {
     @Override
     public void draw() {
         super.draw();
-        System.out.println("je suis de la verdure");
     }
 
     @Override
@@ -88,4 +87,8 @@ public class Plant extends Resource {
     void die(){
     }
 
+    @Override
+    public int consume() {
+        return m_iCurrentNRJ;
+    }
 }

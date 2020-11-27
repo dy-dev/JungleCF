@@ -1,31 +1,47 @@
 package com.arcreane;
 
+import com.arcreane.animal.Predator;
+
 public class Coords {
-    private int m_iX;
-    private int m_iY;
+
+    class Pair{
+        private int m_iX;
+        private int m_iY;
+
+        @Override
+        public boolean equals(Object obj) {
+            return ((Pair)obj).m_iX == m_iX && ((Pair)obj).m_iY == m_iY;
+        }
+    }
+
+    private Pair m_InnerCoords;
 
     public int getX() {
-        return m_iX;
+        return m_InnerCoords.m_iX;
     }
 
     public void setX(int m_iX) {
-        this.m_iX = m_iX;
+        m_InnerCoords.m_iX = m_iX;
     }
 
     public int getY() {
-        return m_iY;
+        return m_InnerCoords.m_iY;
     }
 
     public void setY(int m_iY) {
-        this.m_iY = m_iY;
+        m_InnerCoords.m_iY = m_iY;
     }
 
     public Coords() {
     }
 
     public Coords(int p_iX, int p_iY) {
-        m_iX = p_iX;
-        m_iY = p_iY;
+        m_InnerCoords.m_iX = p_iX;
+        m_InnerCoords.m_iY = p_iY;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return this.m_InnerCoords.equals(obj);
+    }
 }
