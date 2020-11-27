@@ -82,8 +82,8 @@ public class Terrain extends Drawable {
             if (drawable != null)
                 drawable.draw(m_Board);
         }
-        var start = System.nanoTime();
-        for (int i = 0; i < 1000; i++) {
+        var start = System.nanoTime();/*
+      //  for (int i = 0; i < 1000; i++) {
             String board = "";
 
             for (int k = 0; k < m_iHeight; k++) {
@@ -95,8 +95,9 @@ public class Terrain extends Drawable {
                 board += "\n";
             }
             outStream.print(board);
-        }
-        var end1 = System.nanoTime() - start;
+      //  }*/
+
+     /*   var end1 = System.nanoTime() - start;
         start = System.nanoTime();
         for (int j = 0; j < 1000; j++) {
 
@@ -110,18 +111,18 @@ public class Terrain extends Drawable {
         var end2 = System.nanoTime() - start;
         start = System.nanoTime();
         for (int j = 0; j < 1000; j++) {
-            StringBuilder board = new StringBuilder();
+       */     StringBuilder board = new StringBuilder();
 
             for (int k = 0; k < m_iHeight; k++) {
                 board.append(String.join("", m_Board[k])).append("\n");
             }
             outStream.print(board);
-        }
+        /*}
         var end3 = System.nanoTime() - start;
 
         System.out.println(end1/Math.pow(10,9));
         System.out.println(end2/Math.pow(10,9));
-        System.out.println(end3/Math.pow(10,9));
+        System.out.println(end3/Math.pow(10,9));*/
 
     }
 

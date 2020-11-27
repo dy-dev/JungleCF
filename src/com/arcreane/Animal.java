@@ -16,6 +16,8 @@ public class Animal extends Drawable {
     float m_fOrientation; //Angle varying between 0 and 2Pi
     Vision m_Vision;
 
+    String drawingString;
+
     public Animal(int p_iMaxAge, int p_iMaxLifePoint, int p_iMaxVigor,
                   float p_fMaxMovingSpeed, Coords p_Coords, int p_iBornLifePoint,
                   int p_iBornVigor) {
@@ -53,5 +55,11 @@ public class Animal extends Drawable {
 
     public int drinkWater() {
         return 0;
+    }
+
+    @Override
+    public void draw(String[][] p_Board) {
+        p_Board[m_Coords.getY()][m_Coords.getX() ] = drawingString;
+        p_Board[m_Coords.getY()][m_Coords.getX() +1]= "";
     }
 }

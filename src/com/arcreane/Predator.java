@@ -24,13 +24,7 @@ public class Predator extends Animal {
                 p_Coords, BORN_LIFE_POINT, BORN_VIGOR);
 
         m_Smelling = new Smelling(this);
-    }
-
-
-    @Override
-    public void draw(String[][] p_Board) {
-        p_Board[m_Coords.getY()][m_Coords.getX() ] = "\uD83E\uDD81";
-        p_Board[m_Coords.getY()][m_Coords.getX() + 1] = "";
+        drawingString = "\uD83E\uDD81";
     }
 
     @Override

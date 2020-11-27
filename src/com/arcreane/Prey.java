@@ -10,6 +10,7 @@ public class Prey extends Animal {
     public static final float MAX_PREY_MOVING_SPEED = 30;
     static float s_fPreyAcceleration;
 
+
     Hearing m_Hearing;
 
     public Prey(Coords p_Coords) {
@@ -18,14 +19,10 @@ public class Prey extends Animal {
                 p_Coords, BORN_LIFE_POINT, BORN_VIGOR);
         m_Hearing = new Hearing(this);
 
-
+        drawingString = "\uD83D\uDC03";
     }
 
-    @Override
-    public void draw(String[][] p_Board) {
-        p_Board[m_Coords.getY()][m_Coords.getX() ] = "\uD83D\uDC03";
-        p_Board[m_Coords.getY()][m_Coords.getX() +1]= "";
-    }
+
 
     @Override
     public int drinkWater() {

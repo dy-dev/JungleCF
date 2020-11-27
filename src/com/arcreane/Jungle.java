@@ -1,9 +1,7 @@
 package com.arcreane;
 
-import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
@@ -16,31 +14,34 @@ public class Jungle {
     public static void main(String[] args) throws UnsupportedEncodingException {
         AnsiConsole.systemInstall();
         char escCode = 0x1B;
-        int row = 10; int column = 10;
-        System.out.print(String.format("%c[%d;%df",escCode,row,column));
-
-        System.out.println(ansi().eraseScreen().fg(Ansi.Color.RED).a("Hello").fg(Ansi.Color.GREEN).a("World"));
-        System.out.println(ansi().reset());
-
-        for (Ansi.Color col: Ansi.Color.values()) {
-            System.out.println(col);
-
-        }
-//        createNewTerrain();
-//        s_JungleObject[1] = new Weather(getTerrain());
+        int row = 0;
+        int column = 0;
+//        System.out.print(String.format("%c[%d;%df",escCode,row,column));
 //
-//        // while(terrain.hasLivingCreatures()){
-//        for (JungleObject obj : s_JungleObject) {
-//            obj.step();
+//        System.out.println(ansi().eraseScreen().fg(Ansi.Color.RED).a("Hello").fg(Ansi.Color.GREEN).a("World"));
+//        System.out.println(ansi().reset());
+//
+//        for (Ansi.Color col: Ansi.Color.values()) {
+//            System.out.println(col);
+//
 //        }
-//        getTerrain().draw();
+        createNewTerrain();
+        s_JungleObject[1] = new Weather(getTerrain());
 
-        //try {
-        //    Thread.sleep(250);
-        //} catch (InterruptedException e) {
-        //    e.printStackTrace();
-        //}
-        //}
+        while (getTerrain().hasLivingCreatures()) {
+            System.out.println(ansi().eraseScreen());
+            System.out.print(String.format("%c[%d;%df", escCode, row, column));
+            for (JungleObject obj : s_JungleObject) {
+                obj.step();
+            }
+            getTerrain().draw();
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static void createNewTerrain() {
