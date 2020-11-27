@@ -25,6 +25,7 @@ public abstract class Animal extends SpatialItem {
     //ou se trouve le plan d'eau et de s'y diriger
     WaterSpot m_WaterSpot;
 
+    String m_sDrawAnimal;
     Animal(Coords p_Coords){
         m_Coords = p_Coords;
     }
@@ -40,5 +41,10 @@ public abstract class Animal extends SpatialItem {
             int waterThirst =  1 + Terrain.s_RandGenerator.nextInt(MAX_WATER_DRUNK);
             int waterAvailable = m_WaterSpot.requestDrinkingQuantity(this, waterThirst);
         }
+    }
+
+    @Override
+    public void draw(String[][] p_Board) {
+        p_Board[m_Coords.getY()][m_Coords.getX()] = m_sDrawAnimal;
     }
 }

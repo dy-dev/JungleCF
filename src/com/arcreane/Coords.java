@@ -33,6 +33,9 @@ public class Coords {
     }
 
     public Coords() {
+        m_InnerCoords = new Pair();
+        m_InnerCoords.m_iX = (int)(Math.random()*80);
+        m_InnerCoords.m_iY = (int) (Math.random()*30);
     }
 
     public Coords(int p_iX, int p_iY) {

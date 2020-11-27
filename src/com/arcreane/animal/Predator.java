@@ -24,7 +24,7 @@ public class Predator extends Animal {
 
     //Constructeur qui prend un Waterspot en parametre
     public Predator(WaterSpot p_WaterSpot) {
-        super(null);
+        super(new Coords());
         m_WaterSpot = p_WaterSpot;
         m_iAgeMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorAge);
         m_iLifePointMax = 1 + Jungle.s_Random.nextInt(s_iMaxPredatorLifePoint);
@@ -35,6 +35,7 @@ public class Predator extends Animal {
         m_Vision = new Vision();
         m_Smelling = new Smelling();
 
+        m_sDrawAnimal = "🦁";
         pop(false);
     }
 
@@ -44,8 +45,8 @@ public class Predator extends Animal {
     }
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(String[][] m_Board) {
+        super.draw(m_Board);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.arcreane.animal;
 
 import com.arcreane.Consumable;
+import com.arcreane.Coords;
 import com.arcreane.animal.sens.Hearing;
 import com.arcreane.resources.WaterSpot;
 
@@ -16,14 +17,15 @@ public class Prey extends Animal implements Consumable {
 
 
     public Prey(WaterSpot p_WaterSpot) {
-        super(null);
+        super(new Coords());
         m_WaterSpot = p_WaterSpot;
+        m_sDrawAnimal = "🦓";
     }
 
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(String[][] m_Board) {
+        super.draw(m_Board);
     }
 
     @Override

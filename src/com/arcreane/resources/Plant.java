@@ -1,7 +1,5 @@
 package com.arcreane.resources;
 
-import com.arcreane.Coords;
-
 public class Plant extends Resource {
     private static int s_iMaxPlantNRJPoints;
 
@@ -69,8 +67,8 @@ public class Plant extends Resource {
     }
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(String[][] m_Board) {
+        super.draw(m_Board);
     }
 
     @Override

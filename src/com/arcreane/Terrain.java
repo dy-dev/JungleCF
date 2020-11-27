@@ -14,6 +14,18 @@ public class Terrain {
     private int m_iwidth;
     private int m_iHeight;
 
+    private String[][] m_Board;
+
+    /***
+     *  -------------------
+     *  |   p              |
+     *  |                  |
+     *  | X     ~~~~~~     |
+     *  |       ~~~~~~     |
+     *  |       ~~~~~~     |
+     *  | m               m|
+     *  ---------------------
+     */
     /*private Prey[] m_PreysArray;
     private Predator[] m_PredatorsArray;
     private Plant[] m_PlantsArray;*/
@@ -47,6 +59,22 @@ public class Terrain {
 
         m_iwidth = 80;
         m_iHeight = 30;
+
+        m_Board = new String[m_iHeight][m_iwidth];
+        initBoard();
+    }
+
+    private void initBoard() {
+        for (int i = 0; i < m_iHeight; i++) {
+            for (int k = 0; k < m_iwidth; k++) {
+                if (i == 0 || i == m_iHeight - 1)
+                    m_Board[i][k] = "_";
+                else if (k == 0 || k == m_iwidth - 1)
+                    m_Board[i][k] = "|";
+                else
+                    m_Board[i][k] = " ";
+            }
+        }
     }
 
     void step() {
@@ -61,19 +89,15 @@ public class Terrain {
 
     void draw() {
         for (var item : m_SpatialItemArray) {
-            item.draw();
+            item.draw(m_Board);
         }
+        StringBuilder board = new StringBuilder();
+
         for (int i = 0; i < m_iHeight; i++) {
-            for (int k = 0; k < m_iwidth; k++) {
-                if (i == 0 || i == m_iHeight - 1)
-                    System.out.print("_");
-                else if (k == 0 || k == m_iwidth - 1)
-                    System.out.print("|");
-                else
-                    System.out.print(" ");
-            }
-            System.out.println("");
+            board.append(String.join("", m_Board[i]));
+            board.append("\n");
         }
+        System.out.println(board);
 
     }
 

@@ -4,5 +4,5 @@ public class SpatialItem {
     protected Coords m_Coords;
     public void step(){}
 
-    public void draw(){}
+    public void draw(String[][] m_Board){}
 }

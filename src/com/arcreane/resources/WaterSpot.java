@@ -23,8 +23,8 @@ public class WaterSpot extends Resource{
 
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(String[][] m_Board) {
+        super.draw(m_Board);
         System.out.println("Glouglou");
     }
 
